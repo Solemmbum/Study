@@ -12,6 +12,9 @@ class AURA_API AStudyCharacterBase : public ACharacter
 	GENERATED_BODY()
 
 protected:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+	TObjectPtr<USkeletalMeshComponent> Weapon;
+	
 	virtual void BeginPlay() override;
 
 public:
