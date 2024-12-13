@@ -7,6 +7,9 @@
 #include "StudyBasePlayerController.generated.h"
 
 class UInputMappingContext;
+class UInputAction;
+
+struct FInputActionValue;
 
 /**
  * 
@@ -20,11 +23,20 @@ public:
 	AStudyBasePlayerController();
 
 private:
+	UPROPERTY()
+	TObjectPtr<UEnhancedInputComponent> EnhancedInput;
+	
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputMappingContext> AuraContext;
 
+	UPROPERTY(EditAnywhere, Category = "Input")
+	TObjectPtr<UInputAction> MoveAction;
+
+	void Move(const FInputActionValue& Value);
+
 protected:
 	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
 
 public:
 	
