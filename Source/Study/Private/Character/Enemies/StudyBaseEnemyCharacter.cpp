@@ -3,3 +3,12 @@
 
 #include "Character/Enemies/StudyBaseEnemyCharacter.h"
 
+void AStudyBaseEnemyCharacter::HightlightActor()
+{
+	
+}
+
+void AStudyBaseEnemyCharacter::UnHighlightActor()
+{
+	
+}
