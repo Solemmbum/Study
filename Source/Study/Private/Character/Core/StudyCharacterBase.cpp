@@ -1,6 +1,8 @@
-// // Copyright (c) 2024 @ Solemmbum Games - @All Rights Reserved.
+// Copyright (c) 2024 @ Solemmbum Games - @All Rights Reserved.
 
 #include "Character/Core/StudyCharacterBase.h"
+
+#include "GameFramework/CharacterMovementComponent.h"
 
 AStudyCharacterBase::AStudyCharacterBase()
 {

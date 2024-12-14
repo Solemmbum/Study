@@ -9,7 +9,10 @@
 				"C:/Coding/Projects/Study/Plugins/DarkerNodes/Content/Materials/Box.uasset",
 				"C:/Coding/Projects/Study/Plugins/DarkerNodes/Content/Materials/HeaderBox.uasset",
 				"C:/Coding/Projects/Study/Plugins/DarkerNodes/Content/Materials/Panel.uasset",
-				"C:/Coding/Projects/Study/Content/Blueprints/Character/PlayerCharacter/ABP_Study.uasset"
+				"C:/Coding/Projects/Study/Content/Blueprints/Character/PlayerCharacter/ABP_Study.uasset",
+				"C:/Coding/Projects/Study/Content/Blueprints/Core/GameMode/BP_StudyGameMode.uasset",
+				"C:/Coding/Projects/Study/Content/Maps/StartupMap.umap",
+				"C:/Coding/Projects/Study/Content/Blueprints/Character/PlayerCharacter/BP_StudyCharacter.uasset"
 			]
 		}
 	]
