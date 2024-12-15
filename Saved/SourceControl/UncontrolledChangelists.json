@@ -12,7 +12,10 @@
 				"C:/Coding/Projects/Study/Content/Blueprints/Character/PlayerCharacter/ABP_Study.uasset",
 				"C:/Coding/Projects/Study/Content/Blueprints/Core/GameMode/BP_StudyGameMode.uasset",
 				"C:/Coding/Projects/Study/Content/Maps/StartupMap.umap",
-				"C:/Coding/Projects/Study/Content/Blueprints/Character/PlayerCharacter/BP_StudyCharacter.uasset"
+				"C:/Coding/Projects/Study/Content/Blueprints/Character/PlayerCharacter/BP_StudyCharacter.uasset",
+				"C:/Coding/Projects/Study/Content/Blueprints/Character/Enemies/Core/BP_BaseEnemy.uasset",
+				"C:/Coding/Projects/Study/Content/Blueprints/Character/Enemies/Goblins/GoblinSlingshot/BP_GoblinSlingshot.uasset",
+				"C:/Coding/Projects/Study/Content/Blueprints/Character/Enemies/Goblins/GoblinSpear/BP_GoblinSpear.uasset"
 			]
 		}
 	]

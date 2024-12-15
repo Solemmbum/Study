@@ -1,4 +1,4 @@
-// // Copyright (c) 2024 @ Solemmbum Games - @All Rights Reserved.
+// Copyright (c) 2024 @ Solemmbum Games - @All Rights Reserved.
 
 #include "Study.h"
 #include "Modules/ModuleManager.h"

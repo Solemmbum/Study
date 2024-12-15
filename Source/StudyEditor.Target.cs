@@ -1,4 +1,4 @@
-// // Copyright (c) 2024 @ Solemmbum Games - @All Rights Reserved.
+// Copyright (c) 2024 @ Solemmbum Games - @All Rights Reserved.
 
 using UnrealBuildTool;
 using System.Collections.Generic;

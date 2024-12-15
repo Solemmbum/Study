@@ -3,6 +3,8 @@
 
 #include "Character/Enemies/StudyBaseEnemyCharacter.h"
 
+#include "Study/Study.h"
+
 AStudyBaseEnemyCharacter::AStudyBaseEnemyCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,12 +14,18 @@ AStudyBaseEnemyCharacter::AStudyBaseEnemyCharacter()
 
 void AStudyBaseEnemyCharacter::HightlightActor()
 {
-	bIsHighlighted = true;
+	GetMesh()->SetRenderCustomDepth( true);
+	Weapon   ->SetRenderCustomDepth( true);
+	GetMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
+	Weapon   ->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
 }
 
 void AStudyBaseEnemyCharacter::UnHighlightActor()
 {
-	bIsHighlighted = false;
+	GetMesh()->SetRenderCustomDepth(false);
+	Weapon   ->SetRenderCustomDepth(false);
+	GetMesh()->SetCustomDepthStencilValue(0.f);
+	Weapon   ->SetCustomDepthStencilValue(0.f);
 }
 
 // ReSharper disable once CppParameterMayBeConst

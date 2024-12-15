@@ -15,9 +15,6 @@ class STUDY_API AStudyBaseEnemyCharacter : public AStudyCharacterBase, public II
 {
 	GENERATED_BODY()
 
-private:
-	bool bIsHighlighted;
-
 public:
 	AStudyBaseEnemyCharacter();
 	
