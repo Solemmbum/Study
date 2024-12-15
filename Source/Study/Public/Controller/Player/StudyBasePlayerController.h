@@ -9,6 +9,8 @@
 class UInputMappingContext;
 class UInputAction;
 
+class IInteractableInterface;
+
 struct FInputActionValue;
 
 /**
@@ -18,9 +20,6 @@ UCLASS()
 class STUDY_API AStudyBasePlayerController : public APlayerController
 {
 	GENERATED_BODY()
-
-public:
-	AStudyBasePlayerController();
 
 private:
 	UPROPERTY()
@@ -32,12 +31,23 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
 
+	UPROPERTY()
+	TScriptInterface<IInteractableInterface> LastInteractable;
+
+	UPROPERTY()
+	TScriptInterface<IInteractableInterface> CurrentInteractable;
+
+	void CursorTrace();
 	void Move(const FInputActionValue& Value);
 
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 
+	void InitializeInput();
+
 public:
-	
+	AStudyBasePlayerController();
+
+	virtual void PlayerTick(float DeltaTime) override;
 };

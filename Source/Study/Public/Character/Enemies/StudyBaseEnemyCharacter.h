@@ -15,7 +15,13 @@ class STUDY_API AStudyBaseEnemyCharacter : public AStudyCharacterBase, public II
 {
 	GENERATED_BODY()
 
+private:
+	bool bIsHighlighted;
+
 public:
+	AStudyBaseEnemyCharacter();
+	
 	virtual void HightlightActor() override;
 	virtual void UnHighlightActor() override;
+	virtual void Tick(float DeltaSeconds) override;
 };

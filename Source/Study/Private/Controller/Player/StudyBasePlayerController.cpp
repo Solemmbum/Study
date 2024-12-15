@@ -5,6 +5,7 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Study/Interfaces/InteractableInterface.h"
 
 AStudyBasePlayerController::AStudyBasePlayerController()
 {
@@ -14,7 +15,55 @@ AStudyBasePlayerController::AStudyBasePlayerController()
 void AStudyBasePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+	InitializeInput();
+}
 
+// ReSharper disable once CppParameterMayBeConst
+void AStudyBasePlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+
+	CursorTrace();
+}
+
+void AStudyBasePlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, CursorHit);
+	if (!CursorHit.bBlockingHit)
+	{
+		return;
+	}
+
+	LastInteractable = CurrentInteractable;
+	CurrentInteractable = CursorHit.GetActor();
+
+	if (LastInteractable == nullptr)
+	{
+		if (CurrentInteractable != nullptr)
+		{
+			CurrentInteractable->HightlightActor();
+		}
+	}
+	else
+	{
+		if (CurrentInteractable == nullptr)
+		{
+			LastInteractable->UnHighlightActor();
+		}
+		else
+		{
+			if (CurrentInteractable != LastInteractable)
+			{
+				LastInteractable->UnHighlightActor();
+				CurrentInteractable->HightlightActor();
+			}
+		}
+	}
+}
+
+void AStudyBasePlayerController::InitializeInput()
+{
 	try
 	{
 		if (!StudyContext)
@@ -29,8 +78,7 @@ void AStudyBasePlayerController::BeginPlay()
 		check(StudyContext);
 	}
 
-	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	if (Subsystem)
+	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
 		Subsystem->AddMappingContext(StudyContext, 0);
 	}
