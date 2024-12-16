@@ -2,8 +2,6 @@
 
 #include "Character/Core/StudyCharacterBase.h"
 
-#include "GameFramework/CharacterMovementComponent.h"
-
 AStudyCharacterBase::AStudyCharacterBase()
 {
 	PrimaryActorTick.bCanEverTick = false;

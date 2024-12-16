@@ -28,7 +28,6 @@ void AStudyBaseEnemyCharacter::UnHighlightActor()
 	Weapon   ->SetCustomDepthStencilValue(0.f);
 }
 
-// ReSharper disable once CppParameterMayBeConst
 void AStudyBaseEnemyCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);

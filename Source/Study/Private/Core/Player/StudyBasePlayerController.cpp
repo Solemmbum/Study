@@ -1,7 +1,7 @@
 // Copyright (c) 2024 @ Solemmbum Games - @All Rights Reserved.
 
 
-#include "Controller/Player/StudyBasePlayerController.h"
+#include "Core/Player/StudyBasePlayerController.h"
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -18,7 +18,6 @@ void AStudyBasePlayerController::BeginPlay()
 	InitializeInput();
 }
 
-// ReSharper disable once CppParameterMayBeConst
 void AStudyBasePlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);

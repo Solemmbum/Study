@@ -15,7 +15,11 @@
 				"C:/Coding/Projects/Study/Content/Blueprints/Character/PlayerCharacter/BP_StudyCharacter.uasset",
 				"C:/Coding/Projects/Study/Content/Blueprints/Character/Enemies/Core/BP_BaseEnemy.uasset",
 				"C:/Coding/Projects/Study/Content/Blueprints/Character/Enemies/Goblins/GoblinSlingshot/BP_GoblinSlingshot.uasset",
-				"C:/Coding/Projects/Study/Content/Blueprints/Character/Enemies/Goblins/GoblinSpear/BP_GoblinSpear.uasset"
+				"C:/Coding/Projects/Study/Content/Blueprints/Character/Enemies/Goblins/GoblinSpear/BP_GoblinSpear.uasset",
+				"C:/Coding/Projects/Study/Content/Blueprints/Core/PlayerState/BP_StudyPlayerState.uasset",
+				"C:/Coding/Projects/Study/Content/Blueprints/Core/Study/BP_StudyPlayerController.uasset",
+				"C:/Coding/Projects/Study/Content/Blueprints/Controller/Study/BP_StudyPlayerController.uasset",
+				"C:/Coding/Projects/Study/Content/Blueprints/Core/Study/BP_StudyPlayerState.uasset"
 			]
 		}
 	]
