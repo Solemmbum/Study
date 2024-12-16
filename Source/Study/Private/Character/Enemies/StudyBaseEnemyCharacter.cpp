@@ -12,8 +12,8 @@ AStudyBaseEnemyCharacter::AStudyBaseEnemyCharacter()
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 
 	AbilitySystemComponent = CreateDefaultSubobject<UStudyAbilitySystemComponent>("AbilitySystemComponent");
-	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+	AbilitySystemComponent->SetIsReplicated(true);
 	
 	AttributeSet = CreateDefaultSubobject<UStudyAttributeSet>("AttributeSet");
 }

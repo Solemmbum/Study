@@ -11,8 +11,8 @@ AStudyPlayerState::AStudyPlayerState()
 	NetUpdateFrequency = 100.f;
 
 	AbilitySystemComponent = CreateDefaultSubobject<UStudyAbilitySystemComponent>("AbilitySystemComponent");
-	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
+	AbilitySystemComponent->SetIsReplicated(true);
 	
 	AttributeSet = CreateDefaultSubobject<UStudyAttributeSet>("AttributeSet");
 }
