@@ -16,3 +16,13 @@ void AStudyCharacterBase::BeginPlay()
 	Super::BeginPlay();
 
 }
+
+UAbilitySystemComponent* AStudyCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
+UAttributeSet* AStudyCharacterBase::GetAttributeSet() const
+{
+	return AttributeSet;
+}

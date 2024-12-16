@@ -3,13 +3,18 @@
 
 #include "Character/Enemies/StudyBaseEnemyCharacter.h"
 
+#include "AbilitySystem/StudyAbilitySystemComponent.h"
+#include "AbilitySystem/StudyAttributeSet.h"
 #include "Study/Study.h"
 
 AStudyBaseEnemyCharacter::AStudyBaseEnemyCharacter()
 {
-	PrimaryActorTick.bCanEverTick = true;
-	
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+
+	AbilitySystemComponent = CreateDefaultSubobject<UStudyAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+	
+	AttributeSet = CreateDefaultSubobject<UStudyAttributeSet>("AttributeSet");
 }
 
 void AStudyBaseEnemyCharacter::HightlightActor()
