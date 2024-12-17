@@ -29,6 +29,7 @@ void AStudyHUD::InitOverlay(APlayerController* PlayerController, APlayerState* P
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(FWidgetControllerParams(PlayerController, PlayerState, AbilitySystemComponent, AttributeSet));
 
 	OverlayWidget->SetWidgetController(WidgetController);
+	WidgetController->BroadcastInitialValues();
 	
 	OverlayWidget->AddToViewport();
 }

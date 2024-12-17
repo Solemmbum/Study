@@ -10,3 +10,7 @@ void UStudyWidgetController::SetWidgetControllerParams(const FWidgetControllerPa
 	AbilitySystemComponent = WidgetControllerParams.AbilitySystemComponent;
 	AttributeSet = WidgetControllerParams.AttributeSet;
 }
+
+void UStudyWidgetController::BroadcastInitialValues()
+{
+}
