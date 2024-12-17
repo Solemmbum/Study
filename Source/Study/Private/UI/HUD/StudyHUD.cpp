@@ -12,6 +12,7 @@ UOverlayWidgetController* AStudyHUD::GetOverlayWidgetController(const FWidgetCon
 	{
 		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(WidgetControllerParams);
+		OverlayWidgetController->BindCallbacksToDependencies();
 	}
 	
 	return OverlayWidgetController;
@@ -26,7 +27,7 @@ void AStudyHUD::InitOverlay(APlayerController* PlayerController, APlayerState* P
 	OverlayWidget = Cast<UStudyUserWidget>(CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass));
 
 	const FWidgetControllerParams WidgetControllerParams = FWidgetControllerParams(PlayerController, PlayerState, AbilitySystemComponent, AttributeSet);
-	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(FWidgetControllerParams(PlayerController, PlayerState, AbilitySystemComponent, AttributeSet));
+	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
 
 	OverlayWidget->SetWidgetController(WidgetController);
 	WidgetController->BroadcastInitialValues();

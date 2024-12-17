@@ -13,4 +13,10 @@ void UStudyWidgetController::SetWidgetControllerParams(const FWidgetControllerPa
 
 void UStudyWidgetController::BroadcastInitialValues()
 {
+	
+}
+
+void UStudyWidgetController::BindCallbacksToDependencies()
+{
+	
 }
