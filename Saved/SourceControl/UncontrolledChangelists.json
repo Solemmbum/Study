@@ -5,6 +5,8 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/Projects/Study/Content/Blueprints/Actors/BP_HealthPotion.uasset",
+				"C:/Projects/Study/Content/Maps/StartupMap.umap",
 				"C:/Coding/Projects/Study/Plugins/DarkerNodes/Content/Materials/SolidColor.uasset",
 				"C:/Coding/Projects/Study/Plugins/DarkerNodes/Content/Materials/Box.uasset",
 				"C:/Coding/Projects/Study/Plugins/DarkerNodes/Content/Materials/HeaderBox.uasset",
