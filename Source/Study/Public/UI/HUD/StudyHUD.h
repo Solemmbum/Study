@@ -6,7 +6,13 @@
 #include "GameFramework/HUD.h"
 #include "StudyHUD.generated.h"
 
+class UOverlayWidgetController;
+class UAbilitySystemComponent;
 class UStudyUserWidget;
+class UAttributeSet;
+
+struct FWidgetControllerParams;
+
 /**
  * 
  */
@@ -19,11 +25,17 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UStudyUserWidget> OverlayWidgetClass;
 
-protected:
-	virtual void BeginPlay() override;
+	UPROPERTY()
+	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
 
 public:
 	UPROPERTY()
 	TObjectPtr<UStudyUserWidget> OverlayWidget;
-	
+
+	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WidgetControllerParams);
+
+	void InitOverlay(APlayerController* PlayerController, APlayerState* PlayerState, UAbilitySystemComponent* AbilitySystemComponent, UAttributeSet* AttributeSet);
 };

@@ -13,6 +13,8 @@
 				"C:/Projects/Study/Content/Blueprints/UI/ProgressBars/WBP_ManaGlobe.uasset",
 				"C:/Projects/Study/Content/Blueprints/UI/HUD/BP_StudyHUD.uasset",
 				"C:/Projects/Study/Content/Blueprints/Core/GameMode/BP_StudyGameMode.uasset",
+				"C:/Projects/Study/Content/Blueprints/Core/Study/BP_StudyPlayerStateNew.uasset",
+				"C:/Projects/Study/Content/Blueprints/Core/Study/BP_StudyPlayerState.uasset",
 				"C:/Projects/Study/Content/Blueprints/UI/ProgressBars/BP_GlobeProgressBar.uasset",
 				"C:/Projects/Study/Content/Blueprints/UI/ProgressBars/BP_BaseGlobeProgressBar.uasset",
 				"C:/Projects/Study/Content/Blueprints/UI/ProgressBars/BP_HealthGlobe.uasset",

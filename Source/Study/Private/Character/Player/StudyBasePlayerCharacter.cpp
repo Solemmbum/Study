@@ -4,8 +4,10 @@
 #include "Character/Player/StudyBasePlayerCharacter.h"
 
 #include "AbilitySystemComponent.h"
-#include "Core/Player/StudyPlayerState.h"
+#include "Core/Player/StudyBasePlayerController.h"
+#include "Core/Player/StudyBasePlayerState.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "UI/HUD/StudyHUD.h"
 
 AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
 {
@@ -44,11 +46,19 @@ AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
 
 void AStudyBasePlayerCharacter::InitAbilityActorInfo()
 {
-	AStudyPlayerState* StudyPlayerState = GetPlayerState<AStudyPlayerState>();
-	check(StudyPlayerState);
+	AStudyBasePlayerState* StudyPlayerState = GetPlayerState<AStudyBasePlayerState>();
+	checkf(StudyPlayerState, TEXT("Player State uninitialize when InitAbilityActorInfo was called"));
 	StudyPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(StudyPlayerState, this);
 	AbilitySystemComponent = StudyPlayerState->GetAbilitySystemComponent();
 	AttributeSet = StudyPlayerState->GetAttributeSet();
+
+	if (AStudyBasePlayerController* StudyPlayerController = Cast<AStudyBasePlayerController>(Controller))
+	{
+		if (AStudyHUD* StudyHUD = StudyPlayerController->GetHUD<AStudyHUD>())
+		{
+			StudyHUD->InitOverlay(StudyPlayerController, StudyPlayerState, AbilitySystemComponent, AttributeSet);
+		}
+	}
 }
 
 void AStudyBasePlayerCharacter::PossessedBy(AController* NewController)

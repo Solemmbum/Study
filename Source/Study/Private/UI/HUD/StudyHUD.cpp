@@ -3,12 +3,32 @@
 
 #include "UI/HUD/StudyHUD.h"
 
+#include "UI/WidgetControllers/OverlayWidgetController.h"
 #include "UI/Widgets/StudyUserWidget.h"
 
-void AStudyHUD::BeginPlay()
+UOverlayWidgetController* AStudyHUD::GetOverlayWidgetController(const FWidgetControllerParams& WidgetControllerParams)
 {
-	Super::BeginPlay();
+	if (OverlayWidgetController == nullptr)
+	{
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+		OverlayWidgetController->SetWidgetControllerParams(WidgetControllerParams);
+	}
+	
+	return OverlayWidgetController;
+}
 
-	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
-	Widget->AddToViewport();
+void AStudyHUD::InitOverlay(APlayerController* PlayerController, APlayerState* PlayerState,
+	UAbilitySystemComponent* AbilitySystemComponent, UAttributeSet* AttributeSet)
+{
+	checkf(OverlayWidgetClass, TEXT("Overlay Widget Class uninitialized, please fill out BP_StudyHUD"));
+	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller Class uninitialized, please fill out BP_StudyHUD"));
+	
+	OverlayWidget = Cast<UStudyUserWidget>(CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass));
+
+	const FWidgetControllerParams WidgetControllerParams = FWidgetControllerParams(PlayerController, PlayerState, AbilitySystemComponent, AttributeSet);
+	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(FWidgetControllerParams(PlayerController, PlayerState, AbilitySystemComponent, AttributeSet));
+
+	OverlayWidget->SetWidgetController(WidgetController);
+	
+	OverlayWidget->AddToViewport();
 }

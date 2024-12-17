@@ -63,23 +63,15 @@ void AStudyBasePlayerController::CursorTrace()
 
 void AStudyBasePlayerController::InitializeInput()
 {
-	try
-	{
-		if (!StudyContext)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Aura Context was not Valid during AStudyBasePlayerController Begin Play!"));
-			throw(001);
-		}
-	}
-	catch (int32 ErrorCode)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Error Code: %d"), ErrorCode);
-		check(StudyContext);
-	}
+	checkf(StudyContext, TEXT("Aura Context uninitialized, please fill out BP_StudyPlayerController"));
 
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
 		Subsystem->AddMappingContext(StudyContext, 0);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Aura Context uninitialized, please fill out BP_StudyPlayerController"));
 	}
 
 	bShowMouseCursor = true;
@@ -96,19 +88,7 @@ void AStudyBasePlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	EnhancedInput = Cast<UEnhancedInputComponent>(InputComponent);
-	try
-	{
-		if (!EnhancedInput)
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Enhanced Input Component was not Valid during AStudyBasePlayerController Setup Input Component!"));
-			throw(002);
-		}
-	}
-	catch (int32 ErrorCode)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Error Code: %d"), ErrorCode);
-		check(EnhancedInput);
-	}
+	checkf(StudyContext, TEXT("Enhanced Input uninitialized, please fill out BP_StudyPlayerController"));
 
 	EnhancedInput->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AStudyBasePlayerController::Move);
 }

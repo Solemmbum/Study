@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
 #include "GameFramework/PlayerState.h"
-#include "StudyPlayerState.generated.h"
+#include "StudyBasePlayerState.generated.h"
 
 class UAbilitySystemComponent;
 class UAttributeSet;
@@ -14,7 +14,7 @@ class UAttributeSet;
  * 
  */
 UCLASS()
-class STUDY_API AStudyPlayerState : public APlayerState, public IAbilitySystemInterface
+class STUDY_API AStudyBasePlayerState : public APlayerState, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -26,7 +26,7 @@ protected:
 	TObjectPtr<UAttributeSet> AttributeSet;
 	
 public:
-	AStudyPlayerState();
+	AStudyBasePlayerState();
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual UAttributeSet* GetAttributeSet() const;

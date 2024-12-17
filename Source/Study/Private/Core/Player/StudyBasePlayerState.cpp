@@ -1,12 +1,12 @@
 // Copyright (c) 2024 @ Solemmbum Games - @All Rights Reserved.
 
 
-#include "Core/Player/StudyPlayerState.h"
+#include "Core/Player/StudyBasePlayerState.h"
 
 #include "AbilitySystem/StudyAbilitySystemComponent.h"
 #include "AbilitySystem/StudyAttributeSet.h"
 
-AStudyPlayerState::AStudyPlayerState()
+AStudyBasePlayerState::AStudyBasePlayerState()
 {
 	NetUpdateFrequency = 100.f;
 
@@ -17,12 +17,12 @@ AStudyPlayerState::AStudyPlayerState()
 	AttributeSet = CreateDefaultSubobject<UStudyAttributeSet>("AttributeSet");
 }
 
-UAbilitySystemComponent* AStudyPlayerState::GetAbilitySystemComponent() const
+UAbilitySystemComponent* AStudyBasePlayerState::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
 }
 
-UAttributeSet* AStudyPlayerState::GetAttributeSet() const
+UAttributeSet* AStudyBasePlayerState::GetAttributeSet() const
 {
 	return AttributeSet;
 }
