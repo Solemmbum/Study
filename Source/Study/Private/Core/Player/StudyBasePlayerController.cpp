@@ -5,7 +5,7 @@
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "Study/Interfaces/InteractableInterface.h"
+#include "Interfaces/InteractableInterface.h"
 
 AStudyBasePlayerController::AStudyBasePlayerController()
 {

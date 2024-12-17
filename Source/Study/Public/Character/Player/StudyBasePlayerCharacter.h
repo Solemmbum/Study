@@ -16,6 +16,9 @@ class STUDY_API AStudyBasePlayerCharacter : public AStudyCharacterBase
 {
 	GENERATED_BODY()
 
+private:
+	void InitAbilityActorInfo();
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, CAtegory = "Camera")
 	TObjectPtr<UCameraComponent> Camera;
@@ -25,5 +28,8 @@ protected:
 
 public:
 	AStudyBasePlayerCharacter();
+	
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
 	
 };

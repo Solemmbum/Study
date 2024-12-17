@@ -18,6 +18,12 @@ AStudyBaseEnemyCharacter::AStudyBaseEnemyCharacter()
 	AttributeSet = CreateDefaultSubobject<UStudyAttributeSet>("AttributeSet");
 }
 
+void AStudyBaseEnemyCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+}
+
 void AStudyBaseEnemyCharacter::HightlightActor()
 {
 	GetMesh()->SetRenderCustomDepth( true);
@@ -32,11 +38,4 @@ void AStudyBaseEnemyCharacter::UnHighlightActor()
 	Weapon   ->SetRenderCustomDepth(false);
 	GetMesh()->SetCustomDepthStencilValue(0.f);
 	Weapon   ->SetCustomDepthStencilValue(0.f);
-}
-
-void AStudyBaseEnemyCharacter::Tick(float DeltaSeconds)
-{
-	Super::Tick(DeltaSeconds);
-
-	
 }

@@ -3,10 +3,14 @@
 
 #include "Character/Player/StudyBasePlayerCharacter.h"
 
+#include "AbilitySystemComponent.h"
+#include "Core/Player/StudyPlayerState.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
 {
+#pragma region Camera Configuration
+	
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	SpringArm->SetupAttachment(GetRootComponent());
 	SpringArm->bUsePawnControlRotation = false;
@@ -21,6 +25,10 @@ AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	Camera->SetupAttachment(SpringArm);
 	Camera->bUsePawnControlRotation = false;
+	
+#pragma endregion Camera Configuration
+
+#pragma region Movement Configuration
 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->bConstrainToPlane = true;
@@ -30,4 +38,31 @@ AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
+
+#pragma endregion Movement Configuration
+}
+
+void AStudyBasePlayerCharacter::InitAbilityActorInfo()
+{
+	AStudyPlayerState* StudyPlayerState = GetPlayerState<AStudyPlayerState>();
+	check(StudyPlayerState);
+	StudyPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(StudyPlayerState, this);
+	AbilitySystemComponent = StudyPlayerState->GetAbilitySystemComponent();
+	AttributeSet = StudyPlayerState->GetAttributeSet();
+}
+
+void AStudyBasePlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	// Init Ability Actor Info for the Server
+	InitAbilityActorInfo();
+}
+
+void AStudyBasePlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	// Init Ability Actor Info for the Client
+	InitAbilityActorInfo();
 }

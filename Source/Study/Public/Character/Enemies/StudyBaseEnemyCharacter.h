@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Character/Core/StudyCharacterBase.h"
-#include "Study/Interfaces/InteractableInterface.h"
+#include "Interfaces/InteractableInterface.h"
 #include "StudyBaseEnemyCharacter.generated.h"
 
 /**
@@ -15,10 +15,16 @@ class STUDY_API AStudyBaseEnemyCharacter : public AStudyCharacterBase, public II
 {
 	GENERATED_BODY()
 
+protected:
+	virtual void BeginPlay() override;
+
 public:
 	AStudyBaseEnemyCharacter();
+
+#pragma region Enemy Interface
 	
 	virtual void HightlightActor() override;
 	virtual void UnHighlightActor() override;
-	virtual void Tick(float DeltaSeconds) override;
+
+#pragma endregion Enemy Interface
 };
