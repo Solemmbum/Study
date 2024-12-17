@@ -4,7 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
+#include "AbilitySystem/StudyAbilitySystemComponent.h"
 #include "StudyAttributeSet.generated.h"
+
+#define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
+	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 /**
  * 
@@ -33,6 +40,16 @@ public:
 	FGameplayAttributeData MaxMana;
 
 #pragma endregion Attribute Variables
+
+#pragma region Attribute Accessors
+
+	ATTRIBUTE_ACCESSORS(UStudyAttributeSet, Health);
+	ATTRIBUTE_ACCESSORS(UStudyAttributeSet, MaxHealth);
+
+	ATTRIBUTE_ACCESSORS(UStudyAttributeSet, Mana);
+	ATTRIBUTE_ACCESSORS(UStudyAttributeSet, MaxMana);
+
+#pragma endregion Attribute Accessors
 
 #pragma region Attribute Replication Functions
 

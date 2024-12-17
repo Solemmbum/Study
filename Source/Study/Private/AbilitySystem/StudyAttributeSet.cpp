@@ -2,12 +2,14 @@
 
 
 #include "AbilitySystem/StudyAttributeSet.h"
-#include "AbilitySystem/StudyAbilitySystemComponent.h"
 #include "Net/UnrealNetwork.h"
 
 UStudyAttributeSet::UStudyAttributeSet()
 {
-	
+	InitMaxHealth(100.f);
+	InitMaxMana(50.f);
+	InitHealth(100.f);
+	InitMana(50.f);
 }
 
 void UStudyAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
