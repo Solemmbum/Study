@@ -15,7 +15,7 @@ class STUDY_API AStudyEffectActor : public AActor
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Applied Effects")
-	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
+	TArray<TSubclassOf<UGameplayEffect>> GameplayEffectClasses;
 	
 	virtual void BeginPlay() override;
 
