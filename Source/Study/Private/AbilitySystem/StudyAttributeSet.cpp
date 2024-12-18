@@ -7,9 +7,9 @@
 UStudyAttributeSet::UStudyAttributeSet()
 {
 	InitMaxHealth(100.f);
-	InitHealth(100.f);
+	InitHealth(50.f);
 	
-	InitMaxMana(50.f);
+	InitMaxMana(100.f);
 	InitMana(50.f);
 }
 
