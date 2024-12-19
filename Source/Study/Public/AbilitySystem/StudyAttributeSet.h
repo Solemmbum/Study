@@ -23,7 +23,9 @@ class STUDY_API UStudyAttributeSet : public UAttributeSet
 
 public:
 	UStudyAttributeSet();
+	
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 
 #pragma region Attribute Variables
 	

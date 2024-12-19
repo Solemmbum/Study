@@ -23,6 +23,28 @@ void UStudyAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProper
 	DOREPLIFETIME_CONDITION_NOTIFY(UStudyAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 }
 
+void UStudyAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
+{
+	Super::PreAttributeChange(Attribute, NewValue);
+
+	if (Attribute == GetHealthAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
+	}
+	else if (Attribute == GetMaxHealthAttribute())
+	{
+		
+	}
+	else if (Attribute == GetManaAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
+	}
+	else if (Attribute == GetMaxManaAttribute())
+	{
+		
+	}
+}
+
 #pragma region Attribute Replication Functions
 
 void UStudyAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const
