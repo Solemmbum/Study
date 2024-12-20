@@ -2,6 +2,10 @@
 
 
 #include "AbilitySystem/StudyAttributeSet.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
+#include "GameFramework/Character.h"
+#include "GameplayEffectExtension.h"
 #include "Net/UnrealNetwork.h"
 
 UStudyAttributeSet::UStudyAttributeSet()
@@ -31,18 +35,63 @@ void UStudyAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute,
 	{
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
 	}
-	else if (Attribute == GetMaxHealthAttribute())
-	{
-		
-	}
 	else if (Attribute == GetManaAttribute())
 	{
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
 	}
-	else if (Attribute == GetMaxManaAttribute())
+}
+
+void UStudyAttributeSet::SetEffectProperties(const struct FGameplayEffectModCallbackData& Data,
+	FEffectProperties& Props)
+{
+	Props.EffectContextHandle = Data.EffectSpec.GetContext();
+	Props.SourceAbilitySystemComponent = Props.EffectContextHandle.GetOriginalInstigatorAbilitySystemComponent();
+
+	if (IsValid(Props.SourceAbilitySystemComponent))
 	{
-		
+		if (Props.SourceAbilitySystemComponent->AbilityActorInfo.IsValid())
+		{
+			if (Props.SourceAbilitySystemComponent->AbilityActorInfo->AvatarActor.IsValid())
+			{
+				Props.SourceAvatarActor = Props.SourceAbilitySystemComponent->AbilityActorInfo->AvatarActor.Get();
+				Props.SourceController = Props.SourceAbilitySystemComponent->AbilityActorInfo->PlayerController.Get();
+
+				if (Props.SourceController == nullptr)
+				{
+					if (const APawn* Pawn = Cast<APawn>(Props.SourceAvatarActor))
+					{
+						Props.SourceController = Pawn->GetController();
+					}
+				}
+			}
+		}
 	}
+
+	if (Props.SourceController)
+	{
+		Props.SourceCharacter = Cast<ACharacter>(Props.SourceController->GetPawn());
+	}
+
+	if (!Data.Target.AbilityActorInfo.IsValid())
+	{
+		if (!Data.Target.AbilityActorInfo->AvatarActor.IsValid())
+		{
+			Props.TargetAvatarActor = Data.Target.AbilityActorInfo->AvatarActor.Get();
+			Props.TargetController = Data.Target.AbilityActorInfo->PlayerController.Get();
+			Props.TargetCharacter = Cast<ACharacter>(Props.TargetAvatarActor);
+			Props.TargetAbilitySystemComponent = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Props.TargetAvatarActor);
+		}
+	}
+}
+
+void UStudyAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
+{
+	Super::PostGameplayEffectExecute(Data);
+
+	FEffectProperties Props;
+	SetEffectProperties(Data, Props);
+
+	
 }
 
 #pragma region Attribute Replication Functions

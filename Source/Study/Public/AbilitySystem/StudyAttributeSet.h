@@ -13,6 +13,41 @@
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+USTRUCT(BlueprintType)
+struct FEffectProperties
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, Category = "Effect")
+	FGameplayEffectContextHandle EffectContextHandle;
+
+	UPROPERTY(EditAnywhere, Category = "Source")
+	TObjectPtr<UAbilitySystemComponent> SourceAbilitySystemComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Source")
+	TObjectPtr<AActor> SourceAvatarActor;
+
+	UPROPERTY(EditAnywhere, Category = "Source")
+	TObjectPtr<AController> SourceController;
+
+	UPROPERTY(EditAnywhere, Category = "Source")
+	TObjectPtr<ACharacter> SourceCharacter;
+
+	UPROPERTY(EditAnywhere, Category = "Target")
+	TObjectPtr<UAbilitySystemComponent> TargetAbilitySystemComponent;
+
+	UPROPERTY(EditAnywhere, Category = "Target")
+	TObjectPtr<AActor> TargetAvatarActor;
+
+	UPROPERTY(EditAnywhere, Category = "Target")
+	TObjectPtr<AController> TargetController;
+
+	UPROPERTY(EditAnywhere, Category = "Target")
+	TObjectPtr<ACharacter> TargetCharacter;
+
+	FEffectProperties() {}
+};
+
 /**
  * 
  */
@@ -21,11 +56,16 @@ class STUDY_API UStudyAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
 
+private:
+	void SetEffectProperties(const struct FGameplayEffectModCallbackData& Data, FEffectProperties& Props);
+
 public:
 	UStudyAttributeSet();
 	
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+	
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
 #pragma region Attribute Variables
 	
