@@ -10,11 +10,16 @@ UCLASS(Abstract)
 class STUDY_API AStudyBaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
+	
+private:
+
+protected:
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<USkeletalMeshComponent> WeaponMesh;
+	
+	virtual void BeginPlay() override;
 
 public:
 	AStudyBaseCharacter();
-
-protected:
-	virtual void BeginPlay() override;
 
 };
