@@ -16,7 +16,7 @@ class STUDY_API AStudyBaseEnemyCharacter : public AStudyBaseCharacter, public II
 	GENERATED_BODY()
 	
 public:
-	virtual void HighlightActor() override;
-	virtual void UnHighlightActor() override;
+	virtual void HighlightActor_Implementation() override;
+	virtual void UnHighlightActor_Implementation() override;
 	
 };

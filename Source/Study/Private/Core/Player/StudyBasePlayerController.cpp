@@ -5,6 +5,7 @@
 
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Interfaces/InteractableInterface.h"
 
 AStudyBasePlayerController::AStudyBasePlayerController()
 {
@@ -29,6 +30,13 @@ void AStudyBasePlayerController::BeginPlay()
 	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 	InputModeData.SetHideCursorDuringCapture(false);
 	SetInputMode(InputModeData);
+}
+
+void AStudyBasePlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	
+	CursorTrace();
 }
 
 void AStudyBasePlayerController::SetupInputComponent()
@@ -56,4 +64,33 @@ void AStudyBasePlayerController::Move(const FInputActionValue& InputActionValue)
 	
 	ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 	ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+}
+
+void AStudyBasePlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+	
+	if (!CursorHit.bBlockingHit || !IsValid(CursorHit.GetActor()) || !CursorHit.GetActor()->Implements<UInteractableInterface>())
+	{
+		if (CurrentInteractableActor.IsValid())
+		{
+			IInteractableInterface::Execute_UnHighlightActor(CurrentInteractableActor.Get());
+			CurrentInteractableActor.Reset();
+		}
+		
+		return;
+	}
+	
+	if (CurrentInteractableActor.Get() != CursorHit.GetActor())
+	{
+		if (CurrentInteractableActor.IsValid())
+		{
+			IInteractableInterface::Execute_UnHighlightActor(CurrentInteractableActor.Get());
+			CurrentInteractableActor.Reset();
+		}
+		
+		IInteractableInterface::Execute_HighlightActor(CursorHit.GetActor());
+		CurrentInteractableActor = CursorHit.GetActor();
+	}
 }

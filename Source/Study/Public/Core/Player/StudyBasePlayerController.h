@@ -26,7 +26,10 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Input|Movement")
 	TObjectPtr<UInputAction> MoveAction;
 	
+	TSoftObjectPtr<AActor> CurrentInteractableActor;
+	
 	void Move(const FInputActionValue& InputActionValue);
+	void CursorTrace();
 	
 protected:
 	virtual void BeginPlay() override;
@@ -34,4 +37,6 @@ protected:
 	
 public:
 	AStudyBasePlayerController();
+	
+	virtual void Tick(float DeltaTime) override;
 };
