@@ -22,6 +22,7 @@ AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
 	
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	Camera->SetupAttachment(SpringArm);
+	
 	Camera->bUsePawnControlRotation = false;
 	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 400.0f, 0.0f);
@@ -30,6 +31,6 @@ AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
 	GetCharacterMovement()->bConstrainToPlane = true;
 	
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
+	bUseControllerRotationYaw = false;
 }
