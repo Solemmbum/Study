@@ -75,7 +75,7 @@ void AStudyBasePlayerController::CursorTrace()
 	{
 		if (CurrentInteractableActor.IsValid())
 		{
-			IInteractableInterface::Execute_UnHighlightActor(CurrentInteractableActor.Get());
+			IInteractableInterface::Execute_ChangeActorHighlightState(CurrentInteractableActor.Get(), false);
 			CurrentInteractableActor.Reset();
 		}
 		
@@ -86,11 +86,11 @@ void AStudyBasePlayerController::CursorTrace()
 	{
 		if (CurrentInteractableActor.IsValid())
 		{
-			IInteractableInterface::Execute_UnHighlightActor(CurrentInteractableActor.Get());
+			IInteractableInterface::Execute_ChangeActorHighlightState(CurrentInteractableActor.Get(), false);
 			CurrentInteractableActor.Reset();
 		}
 		
-		IInteractableInterface::Execute_HighlightActor(CursorHit.GetActor());
+		IInteractableInterface::Execute_ChangeActorHighlightState(CursorHit.GetActor(), true);
 		CurrentInteractableActor = CursorHit.GetActor();
 	}
 }

@@ -12,14 +12,15 @@ class STUDY_API AStudyBaseCharacter : public ACharacter
 	GENERATED_BODY()
 	
 private:
+	UPROPERTY(EditAnywhere, Category = "Combat", meta=(AllowPrivateAccess = "true"))
+	TObjectPtr<USkeletalMeshComponent> WeaponMesh;
 
 protected:
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	TObjectPtr<USkeletalMeshComponent> WeaponMesh;
-	
 	virtual void BeginPlay() override;
 
 public:
 	AStudyBaseCharacter();
+	
+	USkeletalMeshComponent* GetWeaponMesh() const { return WeaponMesh; }
 
 };
