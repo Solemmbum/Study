@@ -27,7 +27,11 @@ protected:
 public:
 	AStudyBasePlayerState();
 	
+#pragma region Ability System Interface
+	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override { return AbilitySystemComponent; }
 	virtual UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+	
+#pragma endregion Ability System Interface
 	
 };
