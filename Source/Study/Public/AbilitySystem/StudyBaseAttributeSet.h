@@ -4,7 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
+#include "StudyBaseAbilitySystemComponent.h"
 #include "StudyBaseAttributeSet.generated.h"
+
+#define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
+	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 /**
  * 
@@ -15,17 +22,23 @@ class STUDY_API UStudyBaseAttributeSet : public UAttributeSet
 	GENERATED_BODY()
 	
 private:
-	UPROPERTY(ReplicatedUsing = OnRep_Health, Getter)
+#pragma region Attributes
+	
+	UPROPERTY(ReplicatedUsing = OnRep_Health)
 	FGameplayAttributeData Health;
 	
-	UPROPERTY(ReplicatedUsing = OnRep_MaxHealth, Getter)
+	UPROPERTY(ReplicatedUsing = OnRep_MaxHealth)
 	FGameplayAttributeData MaxHealth;
 	
-	UPROPERTY(ReplicatedUsing = OnRep_Mana, Getter)
+	UPROPERTY(ReplicatedUsing = OnRep_Mana)
 	FGameplayAttributeData Mana;
 	
-	UPROPERTY(ReplicatedUsing = OnRep_MaxMana, Getter)
+	UPROPERTY(ReplicatedUsing = OnRep_MaxMana)
 	FGameplayAttributeData MaxMana;
+	
+#pragma endregion Attributes
+	
+#pragma region Attribute Rep Notifies
 	
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
@@ -39,14 +52,20 @@ private:
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
 	
+#pragma endregion Attribute Rep Notifies
+	
 public:
 	UStudyBaseAttributeSet();
 	
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
-	FGameplayAttributeData GetHealth() const { return Health; }
-	FGameplayAttributeData GetMaxHealth() const { return MaxHealth; }
-	FGameplayAttributeData GetMana() const { return Mana; }
-	FGameplayAttributeData GetMaxMana() const { return MaxMana; }
+#pragma region Attribute Accessors
+	
+	ATTRIBUTE_ACCESSORS(UStudyBaseAttributeSet, Health);
+	ATTRIBUTE_ACCESSORS(UStudyBaseAttributeSet, MaxHealth);
+	ATTRIBUTE_ACCESSORS(UStudyBaseAttributeSet, Mana);
+	ATTRIBUTE_ACCESSORS(UStudyBaseAttributeSet, MaxMana);
+	
+#pragma endregion Attribute Accessors
 	
 };
