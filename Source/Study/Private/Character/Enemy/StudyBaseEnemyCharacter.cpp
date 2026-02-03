@@ -34,6 +34,7 @@ AStudyBaseEnemyCharacter::AStudyBaseEnemyCharacter()
 	
 	AbilitySystemComponent = CreateDefaultSubobject<UStudyBaseAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 	
 	AttributeSet = CreateDefaultSubobject<UStudyBaseAttributeSet>("AttributeSet");
 }
