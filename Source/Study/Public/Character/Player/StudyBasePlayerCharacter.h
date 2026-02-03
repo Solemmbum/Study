@@ -23,7 +23,12 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	TObjectPtr<USpringArmComponent> SpringArm;
 	
+	void InitializeAbilityActorInfo();
+	
 public:
 	AStudyBasePlayerCharacter();
+	
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
 	
 };

@@ -18,6 +18,12 @@ class STUDY_API AStudyBaseEnemyCharacter : public AStudyBaseCharacter, public II
 public:
 	AStudyBaseEnemyCharacter();
 	
+	virtual void BeginPlay() override;
+	
+#pragma region Interactable Interface
+	
 	virtual void ChangeActorHighlightState_Implementation(const bool bShouldBeHighlighted) override;
+	
+#pragma endregion Interactable Interface
 	
 };

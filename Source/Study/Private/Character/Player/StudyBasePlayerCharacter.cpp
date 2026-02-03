@@ -3,8 +3,10 @@
 
 #include "Character/Player/StudyBasePlayerCharacter.h"
 
+#include "AbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Core/Player/StudyBasePlayerState.h"
 #include "Camera/CameraComponent.h"
 
 AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
@@ -33,4 +35,32 @@ AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
+}
+
+void AStudyBasePlayerCharacter::InitializeAbilityActorInfo()
+{
+	AStudyBasePlayerState* StudyPlayerState = GetPlayerState<AStudyBasePlayerState>();
+	checkf(StudyPlayerState, TEXT("Player State not valid on AStudyBasePlayerCharacter::InitializeAbilitySystem"));
+	
+	StudyPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(StudyPlayerState, this);
+	
+	AbilitySystemComponent = StudyPlayerState->GetAbilitySystemComponent();
+	checkf(AbilitySystemComponent, TEXT("Ability System Component not valid on AStudyBasePlayerCharacter::InitializeAbilitySystem"));
+	
+	AttributeSet = StudyPlayerState->GetAttributeSet();
+	checkf(AttributeSet, TEXT("Attribute Set not valid on AStudyBasePlayerCharacter::InitializeAbilitySystem"));
+}
+
+void AStudyBasePlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	
+	InitializeAbilityActorInfo();
+}
+
+void AStudyBasePlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+	
+	InitializeAbilityActorInfo();
 }

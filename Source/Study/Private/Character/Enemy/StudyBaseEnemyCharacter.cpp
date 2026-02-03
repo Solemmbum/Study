@@ -39,6 +39,13 @@ AStudyBaseEnemyCharacter::AStudyBaseEnemyCharacter()
 	AttributeSet = CreateDefaultSubobject<UStudyBaseAttributeSet>("AttributeSet");
 }
 
+void AStudyBaseEnemyCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+}
+
 void AStudyBaseEnemyCharacter::ChangeActorHighlightState_Implementation(const bool bShouldBeHighlighted)
 {
 	GetMesh()->SetRenderCustomDepth(bShouldBeHighlighted);
