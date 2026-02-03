@@ -3,6 +3,8 @@
 
 #include "Character/Enemy/StudyBaseEnemyCharacter.h"
 
+#include "AbilitySystem/StudyBaseAbilitySystemComponent.h"
+#include "AbilitySystem/StudyBaseAttributeSet.h"
 #include "Study/Study.h"
 
 AStudyBaseEnemyCharacter::AStudyBaseEnemyCharacter()
@@ -29,6 +31,11 @@ AStudyBaseEnemyCharacter::AStudyBaseEnemyCharacter()
 	
 	GetMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
 	GetWeaponMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
+	
+	AbilitySystemComponent = CreateDefaultSubobject<UStudyBaseAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+	
+	AttributeSet = CreateDefaultSubobject<UStudyBaseAttributeSet>("AttributeSet");
 }
 
 void AStudyBaseEnemyCharacter::ChangeActorHighlightState_Implementation(const bool bShouldBeHighlighted)
