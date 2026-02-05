@@ -17,11 +17,11 @@ void AStudyBasePlayerController::BeginPlay()
 	Super::BeginPlay();
 	
 	check(BaseInputContext);
-	
-	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
-	
-	Subsystem->AddMappingContext(BaseInputContext, 0);
+
+	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()); IsValid(Subsystem))
+	{
+		Subsystem->AddMappingContext(BaseInputContext, 0);
+	}
 	
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;;
