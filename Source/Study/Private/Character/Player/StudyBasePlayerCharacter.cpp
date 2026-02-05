@@ -8,6 +8,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Core/Player/StudyBasePlayerState.h"
 #include "Camera/CameraComponent.h"
+#include "Core/Player/StudyBasePlayerController.h"
+#include "UI/HUD/StudyBaseHUD.h"
 
 AStudyBasePlayerCharacter::AStudyBasePlayerCharacter()
 {
@@ -51,11 +53,29 @@ void AStudyBasePlayerCharacter::InitializeAbilityActorInfo()
 	checkf(AttributeSet, TEXT("Attribute Set not valid on AStudyBasePlayerCharacter::InitializeAbilitySystem"));
 }
 
+void AStudyBasePlayerCharacter::InitializeOverlay()
+{
+	const AStudyBasePlayerController* PlayerController = GetController<AStudyBasePlayerController>();
+	if (!IsValid(PlayerController))
+	{
+		return;
+	}
+	
+	AStudyBaseHUD* HUD = PlayerController->GetHUD<AStudyBaseHUD>();
+	if (!IsValid(HUD))
+	{
+		return;
+	}
+	
+	HUD->InitializeOverlay();
+}
+
 void AStudyBasePlayerCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 	
 	InitializeAbilityActorInfo();
+	InitializeOverlay();
 }
 
 void AStudyBasePlayerCharacter::OnRep_PlayerState()
@@ -63,4 +83,5 @@ void AStudyBasePlayerCharacter::OnRep_PlayerState()
 	Super::OnRep_PlayerState();
 	
 	InitializeAbilityActorInfo();
+	InitializeOverlay();
 }

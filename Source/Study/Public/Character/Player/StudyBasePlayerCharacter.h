@@ -24,6 +24,7 @@ private:
 	TObjectPtr<USpringArmComponent> SpringArm;
 	
 	void InitializeAbilityActorInfo();
+	void InitializeOverlay();
 	
 public:
 	AStudyBasePlayerCharacter();

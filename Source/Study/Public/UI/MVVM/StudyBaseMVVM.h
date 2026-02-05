@@ -14,7 +14,4 @@ class STUDY_API UStudyBaseMVVM : public UMVVMViewModelBase
 {
 	GENERATED_BODY()
 	
-public:
-	virtual void Initialize();
-	
 };

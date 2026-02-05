@@ -6,9 +6,9 @@
 #include "Blueprint/UserWidget.h"
 #include "UI/Widget/StudyBaseUserWidget.h"
 
-void AStudyBaseHUD::BeginPlay()
+void AStudyBaseHUD::InitializeOverlay()
 {
-	Super::BeginPlay();
+	checkf(OverlayWidgetClass, TEXT("Overlay Widget Class uninitialized, please fill out the HUD."))
 	
 	OverlayWidget = CreateWidget<UStudyBaseUserWidget>(GetWorld(), OverlayWidgetClass);
 	OverlayWidget->AddToViewport();

@@ -19,12 +19,11 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Overlay")
 	TSubclassOf<UStudyBaseUserWidget> OverlayWidgetClass;
 	
-protected:
-	virtual void BeginPlay() override;
-	
 public:
 	UPROPERTY()
 	TObjectPtr<UStudyBaseUserWidget> OverlayWidget;
+	
+	void InitializeOverlay();
 	
 	
 };
