@@ -7,8 +7,13 @@
 #include "Core/Player/StudyBasePlayerState.h"
 #include "AbilitySystemComponent.h"
 
-void UVitalAttributesMVVM::Initialize()
+UVitalAttributesMVVM::UVitalAttributesMVVM()
 {
+	if (!IsValid(GetWorld()))
+	{
+		return;
+	}
+	
 	const APlayerController* LocalController = GEngine->GetFirstLocalPlayerController(GetWorld());
 	if (!IsValid(LocalController))
 	{
@@ -39,10 +44,10 @@ void UVitalAttributesMVVM::Initialize()
 	
 #pragma region Attribute Setup
 	
-	SetCurrentHealth(AttributeSet->GetHealth());
 	SetMaxHealth(AttributeSet->GetMaxHealth());
-	SetCurrentMana(AttributeSet->GetMana());
+	SetCurrentHealth(AttributeSet->GetHealth());
 	SetMaxMana(AttributeSet->GetMana());
+	SetCurrentMana(AttributeSet->GetMana());
 	
 #pragma endregion Attribute Setup
 }

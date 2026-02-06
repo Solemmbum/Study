@@ -34,8 +34,7 @@ private:
 #pragma endregion Attribute Variables
 	
 public:
-	UFUNCTION(BlueprintCallable)
-	void Initialize();
+	UVitalAttributesMVVM();
 	
 #pragma region Attribute Delegate Functions
 	
