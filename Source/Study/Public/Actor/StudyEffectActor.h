@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Structs/EffectActorStructs.h"
 #include "StudyEffectActor.generated.h"
 
 class USphereComponent;
@@ -15,13 +16,21 @@ class STUDY_API AStudyEffectActor : public AActor
 	
 private:
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UStaticMeshComponent> MeshComponent;
-	
-	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USphereComponent> SphereComponent;
 
 protected:
+	UPROPERTY(EditAnywhere, Category = "Applied Effects")
+	TArray<FEffect> GameplayEffects;
+	
 	virtual void BeginPlay() override;
+	
+	/**
+	 * @brief Applies an Effect to a Target Actor. Gameplay Effect must never be Invalid.
+	 * @param TargetActor The Target Actor that will receive the Effect.
+	 * @param GameplayEffect The Effect that will be applied.
+	 */
+	UFUNCTION(BlueprintCallable)
+	void ApplyEffectToTarget(AActor* TargetActor, const FEffect& GameplayEffect);
 	
 public:	
 	AStudyEffectActor();
