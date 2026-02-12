@@ -7,7 +7,7 @@
 #include "Structs/EffectActorStructs.h"
 #include "StudyEffectActor.generated.h"
 
-class USphereComponent;
+class UShapeComponent;
 
 UCLASS()
 class STUDY_API AStudyEffectActor : public AActor
@@ -16,13 +16,21 @@ class STUDY_API AStudyEffectActor : public AActor
 	
 private:
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USphereComponent> SphereComponent;
+	TObjectPtr<UShapeComponent> Collision;
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Applied Effects")
 	TArray<FEffect> GameplayEffects;
 	
 	virtual void BeginPlay() override;
+	
+	void SetCollision(const TObjectPtr<UShapeComponent> CollisionIn);
+	
+	UFUNCTION()
+	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	
+	UFUNCTION()
+	virtual void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
 	/**
 	 * @brief Applies an Effect to a Target Actor. Gameplay Effect must never be Invalid.
@@ -34,11 +42,5 @@ protected:
 	
 public:	
 	AStudyEffectActor();
-	
-	UFUNCTION()
-	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	
-	UFUNCTION()
-	virtual void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 };

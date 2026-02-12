@@ -1,27 +1,29 @@
 // Copyright Solemmbum
 
 
-#include "Actor/StudyEffectActor.h"
+#include "EffectActors/StudyEffectActor.h"
 
 #include "AbilitySystemComponent.h"
-#include "Components/SphereComponent.h"
+#include "Components/ShapeComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
 
 AStudyEffectActor::AStudyEffectActor()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	SphereComponent = CreateDefaultSubobject<USphereComponent>("Sphere");
-	SphereComponent->SetupAttachment(RootComponent);
-	SphereComponent->SetSphereRadius(104.f);
+	SetRootComponent(CreateDefaultSubobject<USceneComponent>("RootComponent"));
 }
 
 void AStudyEffectActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	SphereComponent->OnComponentBeginOverlap.AddDynamic(this, &AStudyEffectActor::OnOverlap);
-	SphereComponent->OnComponentEndOverlap.AddDynamic(this, &AStudyEffectActor::OnEndOverlap);
+}
+
+void AStudyEffectActor::SetCollision(const TObjectPtr<UShapeComponent> CollisionIn)
+{
+	Collision = CollisionIn;
+	Collision->OnComponentBeginOverlap.AddDynamic(this, &AStudyEffectActor::OnOverlap);
+	Collision->OnComponentEndOverlap.AddDynamic(this, &AStudyEffectActor::OnEndOverlap);
 }
 
 void AStudyEffectActor::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
