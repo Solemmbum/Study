@@ -46,7 +46,7 @@ UVitalAttributesMVVM::UVitalAttributesMVVM()
 	
 	SetMaxHealth(AttributeSet->GetMaxHealth());
 	SetCurrentHealth(AttributeSet->GetHealth());
-	SetMaxMana(AttributeSet->GetMana());
+	SetMaxMana(AttributeSet->GetMaxMana());
 	SetCurrentMana(AttributeSet->GetMana());
 	
 #pragma endregion Attribute Setup
@@ -112,7 +112,7 @@ void UVitalAttributesMVVM::SetMaxMana(const float& NewMaxMana)
 
 float UVitalAttributesMVVM::GetHealthPercentage() const
 {
-	if (MaxHealth == 0.f)
+	if (GetMaxHealth() == 0.f)
 	{
 		return 0.f;
 	}
@@ -122,7 +122,7 @@ float UVitalAttributesMVVM::GetHealthPercentage() const
 
 float UVitalAttributesMVVM::GetManaPercentage() const
 {
-	if (MaxMana == 0.f)
+	if (GetMaxMana() == 0.f)
 	{
 		return 0.f;
 	}
