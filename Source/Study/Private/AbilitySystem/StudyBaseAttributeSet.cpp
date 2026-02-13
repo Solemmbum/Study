@@ -8,9 +8,9 @@
 UStudyBaseAttributeSet::UStudyBaseAttributeSet()
 {
 	InitMaxHealth(100.f);
-	InitHealth(GetMaxHealth());
+	InitHealth(GetMaxHealth() / 2);
 	InitMaxMana(100.f);
-	InitMana(GetMaxMana());
+	InitMana(GetMaxMana() / 2);
 }
 
 void UStudyBaseAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
