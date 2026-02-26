@@ -34,9 +34,23 @@ protected:
 	
 	UFUNCTION()
 	virtual void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-	
+
+	/**
+	 * @brief Adds Effects to Target Actor based on the given Policy. 
+	 *		  If the Gameplay Effect's Application Policy matches the given Policy, the Effect will be applied to the Target Actor.
+	 *		  Target Ability System Component must be valid.
+	 * @param TargetAbilitySystemComponent The Ability System Component of the Target Actor that will receive the Effects.
+	 * @param Policy The Policy that will be checked against the Gameplay Effects' Application Policy to determine which Effects to apply.
+	 */
 	virtual void AddEffectsToActorBasedOnPolicy(UAbilitySystemComponent* TargetAbilitySystemComponent, const EEffectPolicy Policy);
 	
+	/**
+	 * @brief Removes Effects from the Target Actor based on the given Policy. 
+	 *		  If the Gameplay Effect's Removal Policy matches the given Policy, the Effect will be removed from the Target Actor.
+	 *		  Target Ability System Component must be valid.
+	 * @param TargetAbilitySystemComponent The Ability System Component of the Target Actor that will have the Effect Removed from.
+	 * @param Policy The Policy that will be checked against the Gameplay Effects' Removal Policy to determine which Effects to remove.
+	 */
 	virtual void RemoveEffectsFromActorBasedOnPolicy(UAbilitySystemComponent* TargetAbilitySystemComponent, const EEffectPolicy Policy);
 	
 	/**
@@ -47,6 +61,11 @@ protected:
 	UFUNCTION()
 	void ApplyEffectToTarget(UAbilitySystemComponent* TargetAbilitySystemComponent, const FEffect& GameplayEffect);
 	
+	/**
+	 * @brief Removes an Effect from a Target Actor.
+	 * @param EffectHandle The Effect Handle of the Effect that needs to be removed.
+	 * @param StacksToRemove The amount of Stacks of the Effect to Remove.
+	 */
 	UFUNCTION()
 	void RemoveEffectFromTarget(const FEffectHandle& EffectHandle, const int32 StacksToRemove = 1);
 	
