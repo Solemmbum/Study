@@ -22,6 +22,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Applied Effects")
 	TArray<FEffect> GameplayEffects;
 	
+	UPROPERTY()
+	TArray<FEffectHandle> ActiveEffectsHandles;
+	
 	virtual void BeginPlay() override;
 	
 	void SetCollision(const TObjectPtr<UShapeComponent> CollisionIn);
@@ -32,13 +35,20 @@ protected:
 	UFUNCTION()
 	virtual void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 	
+	virtual void AddEffectsToActorBasedOnPolicy(UAbilitySystemComponent* TargetAbilitySystemComponent, const EEffectPolicy Policy);
+	
+	virtual void RemoveEffectsFromActorBasedOnPolicy(UAbilitySystemComponent* TargetAbilitySystemComponent, const EEffectPolicy Policy);
+	
 	/**
 	 * @brief Applies an Effect to a Target Actor. Gameplay Effect must never be Invalid.
-	 * @param TargetActor The Target Actor that will receive the Effect.
+	 * @param TargetAbilitySystemComponent The Target Actor that will receive the Effect.
 	 * @param GameplayEffect The Effect that will be applied.
 	 */
-	UFUNCTION(BlueprintCallable)
-	void ApplyEffectToTarget(AActor* TargetActor, const FEffect& GameplayEffect);
+	UFUNCTION()
+	void ApplyEffectToTarget(UAbilitySystemComponent* TargetAbilitySystemComponent, const FEffect& GameplayEffect);
+	
+	UFUNCTION()
+	void RemoveEffectFromTarget(const FEffectHandle& EffectHandle, const int32 StacksToRemove = 1);
 	
 public:	
 	AStudyEffectActor();
